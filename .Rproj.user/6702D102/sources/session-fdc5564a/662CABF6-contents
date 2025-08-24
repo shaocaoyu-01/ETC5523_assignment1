@@ -1,0 +1,168 @@
+---
+title: "Writing Markdown for Reports & Slides"
+subtitle: "A 5‑minute crash course"
+author: "Your Name"
+format:
+  revealjs:
+    slide-number: true
+    code-copy: true
+    chalkboard: false
+    incremental: false
+    transition: fade
+execute:
+  echo: true
+  warning: false
+  message: false
+bibliography: refs.bib
+---
+
+## Why Markdown?
+- Plain text → **portable**, **future‑proof**, great with Git.
+- One syntax for **reports** and **slides**.
+- Plays nicely with **Quarto/R/Python** for reproducible workflows.
+- Faster to write than GUIs; easy to **reuse** and **version**.
+
+::: notes
+Goal: sell the audience on “why”. Emphasize portability, version control, and reuse across reports/slides.
+:::
+
+---
+
+## Core syntax in 60 seconds
+**Headings**
+```
+# H1
+## H2
+### H3
+```
+
+**Emphasis, lists, links, images**
+```
+*italic*  **bold**  `code`
+- bullet
+1. numbered
+[link text](https://example.org)
+![Alt text](img/plot.png)
+```
+
+**Line breaks**
+- End a line with two spaces, or leave a blank line for new paragraph.
+
+::: notes
+Keep examples tiny; show how the same rules work in both reports and slides.
+:::
+
+---
+
+## Code, figures & captions (Quarto)
+Use code chunks. Quarto turns plots into figures with captions and cross‑refs.
+
+```{r}
+#| label: fig-cars
+#| fig-cap: "Speed vs stopping distance (base R cars)"
+plot(cars)
+```
+
+Refer to it in text: See @fig-cars.
+
+```{python}
+#| label: tbl-ex
+#| tbl-cap: "Simple table"
+import pandas as pd
+pd.DataFrame({"Species":["Adelie","Chinstrap"], "Count":[44, 37]})
+```
+
+::: notes
+Explain chunk options: label, fig-cap/tbl-cap. Mention @fig- / @tbl- cross-refs.
+:::
+
+---
+
+## Images & tables (pure Markdown)
+**Image with alt text**
+```
+![Scatter of speed vs distance](img/cars.png)
+```
+
+**Table with alignment**
+```
+| Species   | Count |
+|:----------|------:|
+| Adelie    |    44 |
+| Chinstrap |    37 |
+```
+
+Tips: keep alt text meaningful; align numbers to the right.
+
+::: notes
+Call out accessibility (alt text) and numeric alignment.
+:::
+
+---
+
+## Math, citations & cross‑references
+- Inline math: `$a^2 + b^2 = c^2$`
+- Display math:
+  $$
+  \hat{\beta} = (X'X)^{-1}X'y
+  $$
+- Add to YAML: `bibliography: refs.bib`
+- Cite with `@key` and render a reference list.
+- Cross‑refs: label figures/tables/code (`label:`) then reference with `@fig-...`, `@tbl-...`.
+
+::: notes
+If no bib file, say “you can add one later; the syntax stays the same.”
+:::
+
+---
+
+## From report to slides (and back)
+**Report (HTML/PDF/Docx)**
+```yaml
+format:
+  html:
+    toc: true
+    number-sections: true
+```
+
+**Slides (Reveal.js/Beamer/PPTX)**
+```yaml
+format:
+  revealjs:
+    slide-number: true
+    code-copy: true
+```
+- New slide = `---`
+- Speaker notes:
+```
+::: notes
+Say this out loud.
+:::
+```
+
+::: notes
+Show how a single `.qmd` can target different outputs by switching `format`.
+:::
+
+---
+
+## Workflow tips (checklist)
+- Know your **headings**; one H1 per document/deck.
+- Use **short lines** (≤80 chars) for cleaner diffs.
+- Keep figures reproducible via chunks; avoid manual copy‑paste.
+- Write **captions** that explain the “so what”.
+- Use **styles** via YAML/format instead of inline HTML.
+- Proof once, then **render to PDF** (reports) or **present** (slides).
+
+::: notes
+If time’s tight, just hit the first four bullets.
+:::
+
+---
+
+## TL;DR
+- Markdown = fast, portable, reproducible.
+- Quarto turns it into polished **reports** and **slides**.
+- Learn the 20% that covers 80% of cases: headings, lists, code chunks, figures, tables, math.
+
+> Need the template? Use this deck as a starting point.
